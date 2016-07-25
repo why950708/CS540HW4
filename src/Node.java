@@ -57,6 +57,15 @@ public class Node{
 		if(type==2 || type==4)//Not an input or bias node
 		{
 			// TODO: add code here
+			double cache =0 ;
+			for(NodeWeightPair nwp :this.parents)
+			{
+				cache+= nwp.node.getOutput()*nwp.weight;
+				
+			}
+			this.sum = cache;
+			
+			this.outputValue = cache;
 		}
 	}
 
