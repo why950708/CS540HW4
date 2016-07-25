@@ -87,8 +87,36 @@ public class NNImpl{
 	
 	public int calculateOutputForInstance(Instance inst)
 	{
-		return -1;
 		// TODO: add code here
+		//Get the input from the instance
+		for (int i=0;i<inst.attributes.size();i++)
+		{
+			this.inputNodes.get(i).setInput(inst.attributes.get(i));
+		}
+		
+		for(Node hiddenNode:this.hiddenNodes)
+		{
+			hiddenNode.calculateOutput();
+		}
+		
+		for(Node outputNode:this.outputNodes)
+		{
+			outputNode.calculateOutput();
+		}
+	
+		double max =0 ;
+		int index = 0;
+		
+		for(int i = 0;i<this.outputNodes.size();i++){
+			Node output = this.outputNodes.get(i);
+			if(output.getOutput()>max)
+			{
+				max=output.getOutput();
+				index = i;
+			}
+		}
+		return index;
+		
 	}
 	
 
@@ -104,5 +132,28 @@ public class NNImpl{
 	public void train()
 	{
 		// TODO: add code here
+		for(int i=0;i<maxEpoch;i++){
+		for(Instance inst :this.trainingSet)
+		{
+			this.calculateOutputForInstance(inst); //forward 
+		//Backward
+		for(int j =0; j<this.outputNodes.size();j++)
+		{
+			double TO = inst.classValues.get(i)-outputNodes.get(i).getOutput();
+			for(NodeWeightPair pair: outputNodes.get(i).parents)
+			{
+				new weight = this.learningRate*pair.node.getOutput()*
+			}
+				
+		}
+		//Compute Wjk
+			
+			
+		}
+		//Compute Wij 
+		
+		//The derivative
+		}
+		}	
 	}
 }
