@@ -64,10 +64,6 @@ public class Node{
 				
 			}
 			this.sum = cache;
-			if(cache<0)
-			{
-				cache = 0;
-			}
 			
 			this.outputValue = cache;
 		}
