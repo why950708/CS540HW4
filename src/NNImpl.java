@@ -126,7 +126,7 @@ public class NNImpl {
 				// Backward
 				for (int j = 0; j < this.outputNodes.size(); j++) {
 					int derivative = (outputNodes.get(j).getOutput() > 0) ? 1 : 0;
-					double TO = inst.classValues.get(j) - outputNodes.get(i).getOutput();
+					double TO = inst.classValues.get(j) - outputNodes.get(j).getOutput();
 
 					// Compute Wjk
 					
@@ -139,6 +139,11 @@ public class NNImpl {
 				// Compute Wij
 				for (int j = 0; j < this.hiddenNodes.size(); j++) {
 					double hiddenDerivative = (hiddenNodes.get(j).getSum()>0)?1:0;
+					if(hiddenNodes.get(j).parents ==null)
+					{
+						continue;
+						
+					}
 					for (NodeWeightPair pair : hiddenNodes.get(j).parents) {
 						double total = 0;
 						for (Node output : this.outputNodes) {
