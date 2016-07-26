@@ -132,6 +132,7 @@ public class NNImpl{
 	public void train()
 	{
 		double sum=0;
+		double total = 0;
 		// TODO: add code here
 		for(int i=0;i<maxEpoch;i++){
 
@@ -158,8 +159,8 @@ public class NNImpl{
 			double TO = inst.classValues.get(j)-hiddenNodes.get(i).getOutput();
 		for(NodeWeightPair pair:hiddenNodes.get(j).parents)
 		{
-		double weight =this.learningRate*pair.node.getOutput()*derivative*TO;	
-		sum+=weight;
+		double weight =this.learningRate*pair.node.getOutput()*derivative*TO*sum;	
+		total+=weight;
 		}
 		
 		}
